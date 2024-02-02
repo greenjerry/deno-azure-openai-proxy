@@ -50,7 +50,9 @@ async function requestAzure(method: string, body: any, path: string, authKey?: s
         deployName = mapper[modelName] || modelName;
     }
  }
-
+  // azure gpt4v need max_tokens
+  body.max_tokens = body.max_tokens || 4096; 
+  
   const fetchAPI:string = `https://${resourceName}.openai.azure.com/openai/deployments/${deployName}/${path}?api-version=${apiVersion}`;
 
   const payload:RequestInit = {
